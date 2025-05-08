@@ -12,11 +12,7 @@
 
 ## インストールと実行方法
 
-### 必要条件
-
-- Node.js (推奨: v14以上)
-
-### インストール手順
+### ローカルでの実行
 
 1. リポジトリをクローンまたはダウンロードします
    ```
@@ -24,22 +20,52 @@
    cd four-pillars
    ```
 
-2. サーバーを起動します
-   ```
-   node server.js
-   ```
+2. プロジェクトのルートディレクトリにある`index.html`ファイルをブラウザで開きます
 
-3. ブラウザで以下のURLにアクセスします
-   ```
-   http://localhost:3000
-   ```
-
-### 別の方法（HTTPサーバーが不要な場合）
-
-* `public/index.html`ファイルをブラウザで直接開くこともできますが、この場合は相対パスの問題によりJavaScriptモジュールが読み込めない可能性があります。その場合は、以下のどちらかの方法を使用してください。
+または、以下のいずれかの方法でHTTPサーバーを起動して使用することもできます：
 
 * VSCodeのLive Server拡張機能を使用する
 * Pythonの簡易HTTPサーバーを使用する: `python -m http.server 3000`
+
+### GitHub Pagesでの利用
+
+このアプリケーションはGitHub Pagesで公開されています。以下のURLでアクセスできます：
+
+```
+https://yourusername.github.io/four-pillars/
+```
+
+## GitHub Pagesへのデプロイ方法
+
+1. GitHubでリポジトリを作成します
+
+2. リポジトリをクローンします
+   ```
+   git clone https://github.com/yourusername/four-pillars.git
+   cd four-pillars
+   ```
+
+3. コードを追加してコミットします
+   ```
+   git add .
+   git commit -m "四柱推命アプリの初期コミット"
+   ```
+
+4. GitHubにプッシュします
+   ```
+   git push origin main
+   ```
+
+5. GitHub Pagesを有効化します
+   - リポジトリ設定ページに移動します
+   - 「Pages」セクションに移動します
+   - ソースブランチとして「main」を選択します
+   - 「Save」をクリックします
+
+6. 数分後、アプリケーションが以下のURLで公開されます：
+   ```
+   https://yourusername.github.io/four-pillars/
+   ```
 
 ## 使い方
 
@@ -51,25 +77,24 @@
 
 ## プロジェクト構成
 
-このプロジェクトは、将来的なReact Nativeへの移行を考慮し、モジュール化されたアーキテクチャで設計されています。
+このプロジェクトは純粋なHTML/CSS/JavaScriptを使用した静的ウェブサイトとして実装されています。
 
 ```
 /
-├── public/               # 静的ファイル
-│   └── index.html        # メインHTMLファイル
-├── src/                  # ソースコード
-│   ├── app.js            # アプリケーションのエントリーポイント
-│   ├── components/       # UIコンポーネント
+├── index.html         # メインHTMLファイル
+├── .nojekyll          # GitHub Pagesの処理を制御するファイル
+├── src/               # ソースコード
+│   ├── app.js         # アプリケーションのエントリーポイント
+│   ├── components/    # UIコンポーネント
 │   │   ├── BirthdayForm.js  # 入力フォームコンポーネント
 │   │   └── MeishikiResult.js # 結果表示コンポーネント
-│   ├── data/             # データ定義
+│   ├── data/          # データ定義
 │   │   └── kanshiData.js # 干支データ
-│   ├── styles/             # データ定義
-│   │   └── style.js       # スタイルシート
-│   └── utils/            # ユーティリティ
+│   ├── styles/        # スタイル
+│   │   └── styles.css  # スタイルシート
+│   └── utils/         # ユーティリティ
 │       └── meishikiCalculator.js # 命式計算ロジック
-├── server.js             # 簡易HTTPサーバー
-└── README.md             # プロジェクト説明
+└── README.md          # プロジェクト説明
 ```
 
 ## 技術スタック
@@ -77,7 +102,6 @@
 - HTML / CSS / JavaScript (ES6+)
 - モジュールパターン
 - オブジェクト指向プログラミング
-- Node.js (サーバー)
 
 ## 将来の展望
 

@@ -1,6 +1,3 @@
-/**
- * 四柱推命アプリのためのシンプルHTTPサーバー
- */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -8,6 +5,7 @@ const url = require('url');
 
 const PORT = process.env.PORT || 3000;
 
+// MIMEタイプのマッピング
 const MIME_TYPES = {
     '.html': 'text/html',
     '.css': 'text/css',
@@ -20,22 +18,20 @@ const MIME_TYPES = {
     '.ico': 'image/x-icon',
     '.ttf': 'font/ttf',
     '.woff': 'font/woff',
-    '.woff2': 'font/woff2',
-    '.eot': 'application/vnd.ms-fontobject',
-    '.otf': 'font/otf'
+    '.woff2': 'font/woff2'
 };
 
 const server = http.createServer((req, res) => {
     // URLを解析
     const parsedUrl = url.parse(req.url);
-    let pathname = `.${parsedUrl.pathname}`;
+    let pathname = '.' + parsedUrl.pathname;
     
-    // インデックスファイルのデフォルト設定
+    // ルートアクセスの場合はindex.htmlを返す
     if (pathname === './') {
-        pathname = './public/index.html';
+        pathname = './index.html';
     }
     
-    // ファイルパスを取得
+    // ファイル拡張子を取得
     const ext = path.parse(pathname).ext;
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
     
@@ -45,19 +41,12 @@ const server = http.createServer((req, res) => {
             // エラーハンドリング
             if (err.code === 'ENOENT') {
                 // ファイルが見つからない場合は404を返す
-                fs.readFile('./public/index.html', (err, data) => {
-                    if (err) {
-                        res.writeHead(500);
-                        res.end('Error loading index.html');
-                        return;
-                    }
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(data);
-                });
+                res.writeHead(404);
+                res.end(`ファイルが見つかりません: ${pathname}`);
             } else {
                 // その他のエラーは500を返す
                 res.writeHead(500);
-                res.end(`Error: ${err.code}`);
+                res.end(`エラー: ${err.code}`);
             }
             return;
         }
@@ -69,6 +58,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/`);
-    console.log('四柱推命アプリを起動しました。ブラウザで上記URLにアクセスしてください。');
-}); 
+    console.log(`サーバーが起動しました: http://localhost:${PORT}/`);
+    console.log('ブラウザで上記URLにアクセスしてください');
+});
