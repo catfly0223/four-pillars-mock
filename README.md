@@ -56,8 +56,7 @@
 ```
 /
 ├── public/               # 静的ファイル
-│   ├── index.html        # メインHTMLファイル
-│   └── styles.css        # スタイルシート
+│   └── index.html        # メインHTMLファイル
 ├── src/                  # ソースコード
 │   ├── app.js            # アプリケーションのエントリーポイント
 │   ├── components/       # UIコンポーネント
@@ -65,6 +64,8 @@
 │   │   └── MeishikiResult.js # 結果表示コンポーネント
 │   ├── data/             # データ定義
 │   │   └── kanshiData.js # 干支データ
+│   ├── styles/             # データ定義
+│   │   └── style.js       # スタイルシート
 │   └── utils/            # ユーティリティ
 │       └── meishikiCalculator.js # 命式計算ロジック
 ├── server.js             # 簡易HTTPサーバー
