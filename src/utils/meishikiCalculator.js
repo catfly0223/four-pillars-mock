@@ -131,8 +131,8 @@ export class MeishikiCalculator {
         if (!setsuiriDate) throw new Error('節入り日時が取得できませんでした');
         // 午の場合
         if (shi === 6) {
-            const delta1 = kd.zokan_time[6][0]; // [日, 時]
-            const delta2 = kd.zokan_time[6][1];
+            const delta1 = kd.zokanTime[6][0]; // [日, 時]
+            const delta2 = kd.zokanTime[6][1];
             const setsuiri1 = new Date(setsuiriDate.getTime() + delta1[0] * 86400000 + delta1[1] * 3600000);
             const setsuiri2 = new Date(setsuiriDate.getTime() + delta2[0] * 86400000 + delta2[1] * 3600000);
             if (birthday <= setsuiri1) {
